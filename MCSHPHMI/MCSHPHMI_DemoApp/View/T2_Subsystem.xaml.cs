@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MCSHPHMI
+namespace MCSHPHMI_DemoApp.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for T2_Subsystem.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class T2_Subsystem : UserControl
     {
-        public MainWindow()
+        public T2_Subsystem()
         {
             InitializeComponent();
         }
