@@ -23,5 +23,17 @@ namespace MCSHPHMI_DemoApp.Core
         {
             return label;
         }
+
+        public static AlarmComparison FromString(string name)
+        {
+            switch(name)
+            {
+                case "LessThan": return LessThan;
+                case "GreaterThan": return GreaterThan;
+                case "MinRange": return MinRange;
+                case "MaxRange": return MaxRange;
+                default: return null;
+            }
+        }
     }
 }

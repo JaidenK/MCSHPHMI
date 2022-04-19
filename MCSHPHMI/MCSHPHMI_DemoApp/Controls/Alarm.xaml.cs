@@ -1,18 +1,7 @@
 ﻿using MCSHPHMI_DemoApp.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static MCSHPHMI_DemoApp.Core.Globals;
 
 namespace MCSHPHMI_DemoApp.Controls
@@ -22,14 +11,19 @@ namespace MCSHPHMI_DemoApp.Controls
     /// </summary>
     public partial class Alarm : UserControl, IMappable
     {
+        public static System.Media.SoundPlayer AlarmSound;
+
         public enum AlarmLevel
         {
             CRITICAL
         }
 
-        AlarmComparison Compare = AlarmComparison.NullComparison;
         public string Foobar;
         public AlarmLevel Level { get; set; }
+        public bool Latches { get; set; }
+        public double Hysteresis { get; set; }
+        public string MADB_ID { get; set; } // If set, look up the parameters for the alarm in the database
+
         private SysChan _sysChan;
         public SysChan sysChan
         {
@@ -42,7 +36,6 @@ namespace MCSHPHMI_DemoApp.Controls
         private SysChan sysChan2;
 
         private bool _isViolated;
-
         public bool IsViolated
         {
             get { return _isViolated; }
@@ -50,22 +43,62 @@ namespace MCSHPHMI_DemoApp.Controls
             {
                 if (value != _isViolated)
                 {
-                    if(value)
+                    if (value)
+                    {
+                        AlarmTable.AlarmViolated(this);
                         Console.WriteLine("ALARM TRIGGERED: " + this.ToString());
+                        AlarmSound.Play();
+                    }
+
                     _isViolated = value;
                     Visibility = value ? Visibility.Visible : Visibility.Hidden;
                 }
             }
         }
 
-        new public string ToString()
+        private AlarmComparison Compare { get; set; }
+
+        public static readonly DependencyProperty LimitProperty =
+            DependencyProperty.Register(
+            "Limit", typeof(double), typeof(Alarm));
+        public static readonly DependencyProperty ProcessVariableProperty =
+            DependencyProperty.Register(
+            "ProcessVariable", typeof(string), typeof(Alarm));
+        public static readonly DependencyProperty ProcessVariable2Property =
+            DependencyProperty.Register(
+            "ProcessVariable2", typeof(string), typeof(Alarm));
+        public static readonly DependencyProperty ComparisonProperty =
+            DependencyProperty.Register(
+            "CompareType", typeof(string), typeof(Alarm));
+
+        public double Limit
         {
-            return $"{sysChan.ID} {Compare.ToString()} {sysChan2?.ID ?? limit.ToString()}";
+            get { return (double)GetValue(LimitProperty); }
+            set { SetValue(LimitProperty, value); }
         }
 
-        public string Tag2 { get; private set; } = null;
-        public double limit { get; private set; }
+        public string ProcessVariable
+        {
+            get { return (string)GetValue(ProcessVariableProperty); }
+            set { SetValue(ProcessVariableProperty, value); }
+        }
 
+        public string ProcessVariable2
+        {
+            get { return (string)GetValue(ProcessVariable2Property); }
+            set { SetValue(ProcessVariable2Property, value); }
+        }
+
+        public string CompareType
+        {
+            get { return (string)GetValue(ComparisonProperty); }
+            set { SetValue(ComparisonProperty, value); }
+        }
+
+        public override string ToString()
+        {
+            return $"{sysChan.ID} {Compare.ToString()} {sysChan2?.ID ?? Limit.ToString()}";
+        }
 
         public Alarm()
         {
@@ -77,43 +110,74 @@ namespace MCSHPHMI_DemoApp.Controls
             MappableUserControls.Add(this);
         }
 
+        public void Init()
+        {
+            // Broke this out into it's own function because it's not being executed when I need it to be
+            _ = ProcessVariable ?? throw new ArgumentNullException("ProcessVariable cannot be null");
+            //_ = Limit ?? throw new ArgumentNullException("Limit cannot be null");
+            _ = CompareType ?? throw new ArgumentNullException("CompareType cannot be null");
+            if (!(CompareType is null))
+            {
+                Compare = AlarmComparison.FromString(CompareType) ?? throw new ArgumentException($"{CompareType} is not a valid comparison function.");
+            }
+
+            if (AlarmSound is null)
+            {
+                AlarmSound = new System.Media.SoundPlayer();
+                AlarmSound.SoundLocation = @"C:\Windows\Media\Windows Battery Critical.wav";
+            }
+        }
+
         public void Check()
         {
-            IsViolated = Compare.compare(sysChan.Value, sysChan2?.Value ?? limit);
+            IsViolated = Compare.compare(sysChan.Value, sysChan2?.Value ?? Limit);
         }
 
         public SysChan MapToSystemChannel()
         {
-            _ = Tag ?? throw new ArgumentNullException("Control must have FOO GreaterThan 1.0");
-
-            Tag = "ADC1";
-            Compare = AlarmComparison.MinRange;
-            limit = 0;
+            Init();
 
             IsViolated = false;
             Visibility = Visibility.Hidden;
 
-            sysChan = sysChans.Find(x => x.ID == (string)Tag);
+            sysChan = sysChans.Find(x => x.ID == (string)ProcessVariable);
             // Grab the second channel if it was provided
-            if (Tag2 != null)
+            if (ProcessVariable2 != null)
             {
-                sysChan2 = sysChans.Find(x => x.ID == (string)Tag);
+                sysChan2 = sysChans.Find(x => x.ID == (string)ProcessVariable2);
                 if (sysChan2 == SysChan.NullChannel)
+                {
                     // Make sure that a null is returned if either
                     // channel turned out null
                     return sysChan2;
+                }
             }
 
             if (Compare == AlarmComparison.MinRange)
             {
-                limit = sysChan.minAlarm;
+                Limit = sysChan.minAlarm;
             }
             else if (Compare == AlarmComparison.MaxRange)
             {
-                limit = sysChan.maxAlarm;
+                Limit = sysChan.maxAlarm;
             }
 
             return sysChan;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UserControl_Initialized(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            MessageBox.Show($"Clicked:\n{this}");
         }
     }
 }

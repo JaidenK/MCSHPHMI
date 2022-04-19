@@ -23,18 +23,9 @@ namespace MCSHPHMI_DemoApp
             mvm = (MainViewModel)DataContext;
 
 
-            sysChans = GetAllSystemChannels();
             //new Alarm("ADC1", GreaterThan, 0.0, CRITICAL);
             //new Alarm("ADC2", MinRange, CRITICAL);
 
-            try
-            { 
-                MappableUserControls.MapAll();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                Console.WriteLine(ex);
-            }
 
 
             isReadyToDisplayPacket = true;
@@ -65,6 +56,19 @@ namespace MCSHPHMI_DemoApp
             mvm.MyCollection[0].Values.RemoveAt(0);
             //mvm.T1_Overview_VM.LDD3.sysChan.Value = scaled[0];
             isReadyToDisplayPacket = true;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            sysChans = GetAllSystemChannels();
+            try
+            {
+                MappableUserControls.MapAll();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

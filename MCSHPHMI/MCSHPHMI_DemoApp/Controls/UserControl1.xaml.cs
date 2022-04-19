@@ -109,6 +109,7 @@ namespace MCSHPHMI_DemoApp.Controls
                 {
                     NeedleY = -sysChan.Value * unitToPixels + Needle0;
                     OnPropertyChanged("NeedleY");
+                    OnPropertyChanged("sysChan");
                     IsMaxLimitViolated = sysChan.Value > sysChan.maxAlarm;
                     IsMinLimitViolated = sysChan.Value < sysChan.minAlarm;
 

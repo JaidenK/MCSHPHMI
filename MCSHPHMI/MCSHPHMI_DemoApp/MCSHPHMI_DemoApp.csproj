@@ -66,10 +66,17 @@
     <Compile Include="Controls\Alarm.xaml.cs">
       <DependentUpon>Alarm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AlarmTable.xaml.cs">
+      <DependentUpon>AlarmTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BooleanIndicator.xaml.cs">
       <DependentUpon>BooleanIndicator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\LiveNumeric.xaml.cs">
+      <DependentUpon>LiveNumeric.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\AlarmComparison.cs" />
+    <Compile Include="Core\AlarmEvent.cs" />
     <Compile Include="Core\Alarms.cs" />
     <Compile Include="Core\Globals.cs" />
     <Compile Include="Core\IAlarmable.cs" />
@@ -93,11 +100,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\AlarmTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\BooleanIndicator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LiveNumeric.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

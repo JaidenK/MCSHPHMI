@@ -1,15 +1,9 @@
 ﻿using MCSHPHMI_DemoApp.Simulation;
-using static MCSHPHMI_DemoApp.Core.Globals;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Threading;
 using System.Diagnostics;
-using MCSHPHMI_DemoApp.ViewModel;
+using System.Threading;
+using System.Windows.Threading;
+using static MCSHPHMI_DemoApp.Core.Globals;
 
 namespace MCSHPHMI_DemoApp.Core
 {
@@ -40,15 +34,19 @@ namespace MCSHPHMI_DemoApp.Core
                 //}
 
                 // Check if we're ready to display a packet before bothering to scale it. Also GUI throttling
-                if(isReadyToDisplayPacket && stopwatch.ElapsedMilliseconds > ((int)(1000/60)))
+                if (isReadyToDisplayPacket && stopwatch.ElapsedMilliseconds > ((int)(1000 / 60)))
                 {
                     stopwatch.Restart();
                     isReadyToDisplayPacket = false;
                     Scaler.ScaleAll(counts, scaled);
 
-                    sysChans[0].Value = scaled[0];
-                    sysChans[1].Value = scaled[1];
-
+                    try
+                    {
+                        sysChans[0].Value = scaled[0];
+                        sysChans[1].Value = scaled[1];
+                    }
+                    catch (Exception ex)
+                    { }
                     mainWindow.Dispatcher.BeginInvoke(DispatcherPriority.Background, new newDelegate(mainWindow.DisplayPacket)); // Background is lower priority than input
                 }
             }

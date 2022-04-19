@@ -9,7 +9,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Background="{StaticResource Gray1}"
-        Title="MainWindow" Height="743.5" Width="1160">
+        Title="MainWindow" Height="743.5" Width="1160" Loaded="Window_Loaded">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
@@ -19,29 +19,98 @@
             <Button Content="Subsystem" Command="{Binding SubsystemCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,29,0,0"/>
         </Grid>
         <Grid>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <Grid Width="67" Height="67" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,394,0,0" RenderTransformOrigin="0.5,0.5">
+                <Rectangle Height="15" Width="30" Fill="White" Stroke="Black">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="15" Y="-18"/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Ellipse Width="50" Height="50" Fill="White" Stroke="Black"/>
+                <Ellipse Width="15" Height="15" Fill="White" Stroke="Black"/>
+            </Grid>
+
+            <Grid Width="61" Height="45" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,416,0,0" RenderTransformOrigin="0.5,0.5">
+                <Rectangle Height="1" Width="1" Fill="White" Stroke="Black">
+                </Rectangle>
+                <Polygon  Points="0,0 30,18 0,36" Stroke="Black" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-12"/>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polygon  Points="30,0 0,18 30,36" Stroke="Black" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="12"/>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                </Polygon>
+                <Polyline Points="0,0 0,15" Stroke="Black" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Polyline.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-8"/>
+                        </TransformGroup>
+                    </Polyline.RenderTransform>
+                </Polyline>
+                <Polygon Points="0,0 35,0 35,-15 0,-15" Stroke="Black" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="-15"/>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                </Polygon>
+            </Grid>
+
+
+
+
+
+
+
+            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,327,0,0"/>
             <MCS:UserControl1 Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,26,0,0" Height="216" Width="45"/>
             <MCS:UserControl1 Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="76,26,0,0" Height="216" Width="45"/>
             <MCS:UserControl1 Tag="AasdDC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="126,26,0,0" Height="216" Width="45"/>
-            <MCS:Alarm Tag="ADC1 GreaterThan 1.00" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="20" Margin="50,17,0,0"/>
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <MCS:Alarm ProcessVariable="ADC1"
+                       CompareType="GreaterThan"
+                       Limit="0.30"
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Width="20" 
+                       Height="20" 
+                       Margin="50,17,0,0"/>
+            <MCS:Alarm ProcessVariable="ADC1"
+                       CompareType="MinRange"
+                       HorizontalAlignment="Left" 
+                       VerticalAlignment="Top" 
+                       Width="20" 
+                       Height="20" 
+                       Margin="50,17,0,0"/>
+
+
+
+
+
+
+
             <Grid Margin="239,61,0,0" HorizontalAlignment="Left" Width="100" VerticalAlignment="Top" Height="211">
                 <Rectangle Stroke="Black" RadiusX="100" RadiusY="20"/>
                 <Border BorderBrush="Black" BorderThickness="1" Margin="0,30">
@@ -77,6 +146,19 @@
                 <TextBlock Text="Process 3" Grid.Row="2" VerticalAlignment="Center"/>
                 <UserControl Content="{Binding Status3}" Grid.Column="2" Grid.Row="2"/>
             </Grid>
+            <MCS:AlarmTable Width="589" 
+                Height="208" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" Margin="0,0,29,94"/>
+            <MCS:AlarmTable Width="589" 
+                Height="109" 
+                VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" Margin="0,0,166,68"/>
+            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,345,0,0"/>
+            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,363,0,0"/>
+            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,381,0,0"/>
+            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,399,0,0"/>
+            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,417,0,0"/>
         </Grid>
         <!--<ContentPresenter Content="{Binding MainView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
     </DockPanel>
