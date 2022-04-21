@@ -1,5 +1,6 @@
 ﻿using System;
 using static MCSHPHMI.Core.Globals;
+using MCSHPHMI.View;
 namespace MCSHPHMI.Core
 {
     public class ProcessVariable : ObservableObject
@@ -152,6 +153,15 @@ namespace MCSHPHMI.Core
             }
         }
                
+
+        // Move this to a different file
+        public void ShowEditor()
+        {
+            ProcVarEditor?.Close();
+            ProcVarEditor = new ProcessVarEditor();
+            ProcVarEditor.DataContext = this;
+            ProcVarEditor.Show();
+        }
     }
 
 }

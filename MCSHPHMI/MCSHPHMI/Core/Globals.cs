@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MCSHPHMI.View;
 
 namespace MCSHPHMI.Core
 {
@@ -11,5 +12,7 @@ namespace MCSHPHMI.Core
     {
         public static List<ProcessVariable> AllProcessVariables = new List<ProcessVariable>();
         public static Dictionary<string, ProcessVariable> ProcVarDict = new Dictionary<string, ProcessVariable>();
+
+        public static ProcessVarEditor ProcVarEditor;
     }
 }

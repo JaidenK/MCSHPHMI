@@ -25,6 +25,9 @@
                 <MCS:RadarChart Margin="5"/>
 
             </StackPanel>
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="281.4,369,0,0">
+                <ToggleButton Width="40" Height="20"/>
+            </Grid>
             <Grid Width="67" Height="67" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,394,0,0" RenderTransformOrigin="0.5,0.5">
                 <Rectangle Height="15" Width="30" Fill="White" Stroke="Black">
                     <Rectangle.RenderTransform>
@@ -186,7 +189,7 @@
 
             <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="1032,48,0,0"/>
 
-            
+
             <MCS:AnalogBar Tag="AasdDC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1304,2,-196,0" Height="216" Width="44"/>
             <MCS:Alarm ProcessVariable="ADC1"
                        CompareType="GreaterThan"
@@ -195,14 +198,14 @@
                        VerticalAlignment="Top" 
                        Width="20" 
                        Height="20" 
-                       Margin="-69,12,0,0"/>
+                       Margin="399,36,0,0"/>
             <MCS:Alarm ProcessVariable="ADC1"
                        CompareType="MinRange"
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Width="20" 
                        Height="20" 
-                       Margin="-69,37,0,0"/>
+                       Margin="399,61,0,0"/>
 
 
 
@@ -248,7 +251,7 @@
             <MCS:AlarmTable Width="588" 
                 Height="208" 
                 VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" Margin="0,0,-664,154"/>
+                HorizontalAlignment="Right" Margin="0,0,0,1"/>
             <MCS:AlarmTable Width="590" 
                 Height="109" 
                 VerticalAlignment="Bottom" 

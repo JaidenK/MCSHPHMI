@@ -1,0 +1,67 @@
+﻿<Window x:Class="MCSHPHMI.View.ProcessVarEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MCSHPHMI.View"
+        mc:Ignorable="d"
+        Title="Process Variable Info" Width="350"
+        Background="{StaticResource Gray1}" SizeToContent="Height">
+    <Grid>
+        <StackPanel Margin="10">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Margin" Value="5"/>
+                </Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Width" Value="85"/>
+                </Style>
+            </StackPanel.Resources>
+            <DockPanel>
+                <TextBlock Text="ID"/>
+                <TextBox Text="{Binding ID}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Short Desc."/>
+                <TextBox Text="{Binding ShortDesc}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Units"/>
+                <TextBox Text="{Binding Units}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Description"/>
+                <TextBox Text="{Binding Description}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Value"/>
+                <TextBox Text="{Binding Value}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Scale minimum"/>
+                <TextBox Text="{Binding minScale}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Scale maximum"/>
+                <TextBox Text="{Binding maxScale}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Alarm minimum"/>
+                <TextBox Text="{Binding minAlarm}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Alarm maximum"/>
+                <TextBox Text="{Binding maxAlarm}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Ideal minimum"/>
+                <TextBox Text="{Binding minIdeal}"/>
+            </DockPanel>
+            <DockPanel>
+                <TextBlock Text="Ideal maximum"/>
+                <TextBox Text="{Binding maxIdeal}"/>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Window>

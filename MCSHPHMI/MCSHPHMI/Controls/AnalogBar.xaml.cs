@@ -184,5 +184,10 @@ namespace MCSHPHMI.Controls
         {
             return $"Analog Bar Control (ID={Tag ?? "NULL TAG"})";
         }
+
+        private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ProcVar.ShowEditor();
+        }
     }
 }
