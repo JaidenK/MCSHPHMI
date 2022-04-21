@@ -1,10 +1,10 @@
-﻿using MCSHPHMI_DemoApp.Core;
+﻿using MCSHPHMI.Core;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using static MCSHPHMI_DemoApp.Core.Globals;
+using static MCSHPHMI.Core.Globals;
 
-namespace MCSHPHMI_DemoApp.Controls
+namespace MCSHPHMI.Controls
 {
     /// <summary>
     /// Interaction logic for Alarm.xaml
@@ -24,16 +24,16 @@ namespace MCSHPHMI_DemoApp.Controls
         public double Hysteresis { get; set; }
         public string MADB_ID { get; set; } // If set, look up the parameters for the alarm in the database
 
-        private SysChan _sysChan;
-        public SysChan sysChan
+        private ProcessVariable _sysChan;
+        public ProcessVariable ProcVar
         {
             get { return _sysChan; }
             set
             {
-                _sysChan = value ?? SysChan.NullChannel;
+                _sysChan = value ?? Core.ProcessVariable.NullProcess;
             }
         }
-        private SysChan sysChan2;
+        private ProcessVariable sysChan2;
 
         private bool _isViolated;
         public bool IsViolated
@@ -97,7 +97,7 @@ namespace MCSHPHMI_DemoApp.Controls
 
         public override string ToString()
         {
-            return $"{sysChan.ID} {Compare.ToString()} {sysChan2?.ID ?? Limit.ToString()}";
+            return $"{ProcVar.ID} {Compare.ToString()} {sysChan2?.ID ?? Limit.ToString()}";
         }
 
         public Alarm()
@@ -130,22 +130,27 @@ namespace MCSHPHMI_DemoApp.Controls
 
         public void Check()
         {
-            IsViolated = Compare.compare(sysChan.Value, sysChan2?.Value ?? Limit);
+            IsViolated = Compare.compare(ProcVar.Value, sysChan2?.Value ?? Limit);
         }
 
-        public SysChan MapToSystemChannel()
+        public void Trigger()
+        {
+            IsViolated = true;
+        }
+
+        public ProcessVariable MapToSystemChannel()
         {
             Init();
 
             IsViolated = false;
             Visibility = Visibility.Hidden;
 
-            sysChan = sysChans.Find(x => x.ID == (string)ProcessVariable);
+            ProcVar = AllProcessVariables.Find(x => x.ID == (string)ProcessVariable);
             // Grab the second channel if it was provided
             if (ProcessVariable2 != null)
             {
-                sysChan2 = sysChans.Find(x => x.ID == (string)ProcessVariable2);
-                if (sysChan2 == SysChan.NullChannel)
+                sysChan2 = AllProcessVariables.Find(x => x.ID == (string)ProcessVariable2);
+                if (sysChan2 == Core.ProcessVariable.NullProcess)
                 {
                     // Make sure that a null is returned if either
                     // channel turned out null
@@ -155,14 +160,14 @@ namespace MCSHPHMI_DemoApp.Controls
 
             if (Compare == AlarmComparison.MinRange)
             {
-                Limit = sysChan.minAlarm;
+                Limit = ProcVar.minAlarm;
             }
             else if (Compare == AlarmComparison.MaxRange)
             {
-                Limit = sysChan.maxAlarm;
+                Limit = ProcVar.maxAlarm;
             }
 
-            return sysChan;
+            return ProcVar;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

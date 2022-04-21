@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Svg2Xaml, Version=0.3.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Svg2Xaml.0.3.0.7\lib\net40\Svg2Xaml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -48,17 +51,36 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="UserControl1.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="ObservableObject.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Controls\Alarm.xaml.cs">
+      <DependentUpon>Alarm.xaml</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Controls\AlarmTable.xaml.cs">
+      <DependentUpon>AlarmTable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BooleanGeometry.xaml.cs">
+      <DependentUpon>BooleanGeometry.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BooleanIndicator.xaml.cs">
+      <DependentUpon>BooleanIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LiveNumeric.xaml.cs">
+      <DependentUpon>LiveNumeric.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AnalogBar.xaml.cs">
+      <DependentUpon>AnalogBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\RadarChart.xaml.cs">
+      <DependentUpon>RadarChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\AlarmComparison.cs" />
+    <Compile Include="Core\AlarmEvent.cs" />
+    <Compile Include="Core\Alarms.cs" />
+    <Compile Include="Core\Globals.cs" />
+    <Compile Include="Core\IAlarmable.cs" />
+    <Compile Include="Core\IMappable.cs" />
+    <Compile Include="Core\MappableUserControl.cs" />
+    <Compile Include="Core\ObservableObject.cs" />
+    <Compile Include="Core\ProcessVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -76,10 +98,45 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\Alarm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AlarmTable.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BooleanGeometry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BooleanIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LiveNumeric.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AnalogBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\RadarChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

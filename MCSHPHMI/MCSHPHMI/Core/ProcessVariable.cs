@@ -1,6 +1,8 @@
-﻿namespace MCSHPHMI_DemoApp.Core
+﻿using System;
+using static MCSHPHMI.Core.Globals;
+namespace MCSHPHMI.Core
 {
-    public class SysChan : ObservableObject
+    public class ProcessVariable : ObservableObject
     {
         private string _ID = "ID";
         private string _shortDesc = "Desc.";
@@ -117,16 +119,20 @@
 
         public int packetIndex { get; set; }
 
-        public SysChan(string ID, string Nomen, string Units, string Description)
+        public ProcessVariable(string ID, string Nomen, string Units, string Description, bool excludeFromList = false)
         {
             this.ID = ID;
             this.ShortDesc = Nomen;
             this.Units = Units;
             this.Description = Description;
             this.Value = 0;
+            
+            // This flag is used in places that generate the default placeholder objects
+            if(!excludeFromList)
+                AllProcessVariables.Add(this);
         }
 
-        public SysChan SetRanges(double minScale, double maxScale, double minAlarm, double maxAlarm, double minIdeal, double maxIdeal)
+        public ProcessVariable SetRanges(double minScale, double maxScale, double minAlarm, double maxAlarm, double minIdeal, double maxIdeal)
         {
             this.minScale = minScale;
             this.maxScale = maxScale;
@@ -137,12 +143,12 @@
             return this;
         }
 
-        private static SysChan _nullChannel;
-        public static SysChan NullChannel
+        private static ProcessVariable _nullProcess;
+        public static ProcessVariable NullProcess
         {
             get
             {
-                return _nullChannel ?? (_nullChannel = new SysChan("NULL","NULL","NULL","NULL").SetRanges(-10,10,-7,7,-3,3));
+                return _nullProcess ?? (_nullProcess = new ProcessVariable("NULL","NULL","NULL","NULL",true).SetRanges(-10,10,-7,7,-3,3));
             }
         }
                

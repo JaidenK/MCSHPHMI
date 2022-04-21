@@ -1,4 +1,4 @@
-﻿using MCSHPHMI_DemoApp.Core;
+﻿using MCSHPHMI.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MCSHPHMI_DemoApp.Controls
+namespace MCSHPHMI.Controls
 {
 
     /// <summary>

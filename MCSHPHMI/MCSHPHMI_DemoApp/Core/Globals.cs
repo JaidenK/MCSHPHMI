@@ -28,6 +28,5 @@ namespace MCSHPHMI_DemoApp.Core
         /// </summary>
         public static MainWindow mainWindow;
         public delegate void newDelegate();
-        public static List<SysChan> sysChans;
     }
 }

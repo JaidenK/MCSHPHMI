@@ -1,11 +1,11 @@
-﻿using MCSHPHMI_DemoApp.Controls;
+﻿using MCSHPHMI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MCSHPHMI_DemoApp.Core
+namespace MCSHPHMI.Core
 {
     public class AlarmEvent
     {

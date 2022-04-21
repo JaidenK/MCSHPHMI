@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Threading;
 using static MCSHPHMI_DemoApp.Core.Globals;
+using static MCSHPHMI.Core.Globals;
 
 namespace MCSHPHMI_DemoApp.Core
 {
@@ -40,15 +41,17 @@ namespace MCSHPHMI_DemoApp.Core
                     isReadyToDisplayPacket = false;
                     Scaler.ScaleAll(counts, scaled);
 
-                    try
-                    {
-                        sysChans[0].Value = scaled[0];
-                        sysChans[1].Value = scaled[1];
-                    }
-                    catch (Exception ex)
-                    { }
-                    mainWindow.Dispatcher.BeginInvoke(DispatcherPriority.Background, new newDelegate(mainWindow.DisplayPacket)); // Background is lower priority than input
+                    //try
+                    //{
+                        AllProcessVariables[0].Value = scaled[0];
+                        AllProcessVariables[1].Value = scaled[1];
+                    //}
+                    //catch (Exception ex)
+                    //{ }
+                    mainWindow.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new newDelegate(mainWindow.DisplayPacket)); // Background is lower priority than input
                 }
+
+                Thread.Sleep(10);
             }
         }
     }

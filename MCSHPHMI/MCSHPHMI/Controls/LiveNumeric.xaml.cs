@@ -1,4 +1,4 @@
-﻿using MCSHPHMI_DemoApp.Core;
+﻿using MCSHPHMI.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MCSHPHMI_DemoApp.Core.Globals;
+using static MCSHPHMI.Core.Globals;
 
-namespace MCSHPHMI_DemoApp.Controls
+namespace MCSHPHMI.Controls
 {
     /// <summary>
     /// Interaction logic for LiveNumeric.xaml
@@ -31,22 +31,22 @@ namespace MCSHPHMI_DemoApp.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private SysChan _sysChan = SysChan.NullChannel;
+        private ProcessVariable _procVar = ProcessVariable.NullProcess;
 
-        public SysChan sysChan
+        public ProcessVariable ProcVar
         {
-            get { return _sysChan; }
+            get { return _procVar; }
             set {
-                _sysChan = value ?? SysChan.NullChannel;
-                _sysChan.PropertyChanged += LN_PropertyChanged;
+                _procVar = value ?? ProcessVariable.NullProcess;
+                _procVar.PropertyChanged += LN_PropertyChanged;
             }
         }
 
         public void LN_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(sender == sysChan)
+            if(sender == ProcVar)
             {
-                OnPropertyChanged("sysChan");
+                OnPropertyChanged("ProcVar");
             }
         }
 
@@ -57,14 +57,14 @@ namespace MCSHPHMI_DemoApp.Controls
             MappableUserControls.Add(this);
         }
 
-        public SysChan MapToSystemChannel()
+        public ProcessVariable MapToSystemChannel()
         {
-            sysChan = sysChans.Find(x => x.ID == (string)Tag);
-            if (sysChan != SysChan.NullChannel)
+            ProcVar = AllProcessVariables.Find(x => x.ID == (string)Tag);
+            if (ProcVar != ProcessVariable.NullProcess)
             {
-                Tag = sysChan.ShortDesc;
+                Tag = ProcVar.ShortDesc;
             }
-            return sysChan;
+            return ProcVar;
         }
     }
 }

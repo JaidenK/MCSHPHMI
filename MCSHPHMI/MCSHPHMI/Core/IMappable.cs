@@ -1,4 +1,4 @@
-﻿namespace MCSHPHMI_DemoApp.Core
+﻿namespace MCSHPHMI.Core
 {
     /// <summary>
     /// Mappables must add themselves to MappableUserControls
@@ -6,8 +6,8 @@
     /// </summary>
     public interface IMappable
     {
-        SysChan sysChan { get; set; }
+        ProcessVariable ProcVar { get; set; }
 
-        SysChan MapToSystemChannel();
+        ProcessVariable MapToSystemChannel();
     }
 }

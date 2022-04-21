@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MCSHPHMI_DemoApp.Core
+namespace MCSHPHMI.Core
 {
     public class AlarmComparison
     {

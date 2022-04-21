@@ -1,4 +1,4 @@
-﻿using MCSHPHMI_DemoApp.Controls;
+﻿using MCSHPHMI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ namespace MCSHPHMI_DemoApp.ViewModel
 {
     class T1_Overview_ViewModel : ObservableObject
     {
-        private UserControl1 _LDD3;
+        private AnalogBar _LDD3;
 
-        public UserControl1 LDD3
+        public AnalogBar LDD3
         {
             get { return _LDD3; }
             set { _LDD3 = value; OnPropertyChanged(); }

@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MCSHPHMI_DemoApp"
              xmlns:viewModel="clr-namespace:MCSHPHMI_DemoApp.ViewModel"
-             xmlns:controls="clr-namespace:MCSHPHMI_DemoApp.Controls"
+             xmlns:controls="clr-namespace:MCSHPHMI.Controls"
              xmlns:view="clr-namespace:MCSHPHMI_DemoApp.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Controls/Controls.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MCSHPHMI;component/Controls/Controls.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+
 
             <SolidColorBrush x:Key="Gray1" Color="#CCCCCC" />
             <SolidColorBrush x:Key="Gray2" Color="#999999" />
@@ -24,7 +26,8 @@
             <SolidColorBrush x:Key="AlarmYellow" Color="#FFF546"/>
 
             <FontFamily x:Key="LiveDataFont">Consolas</FontFamily>
-            
+
+
             <DataTemplate DataType="{x:Type viewModel:T1_Overview_ViewModel}">
                 <view:T1_Overview/>
             </DataTemplate>

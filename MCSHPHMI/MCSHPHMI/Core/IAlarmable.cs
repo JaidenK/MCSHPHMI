@@ -1,5 +1,5 @@
-﻿using MCSHPHMI_DemoApp.Controls;
-namespace MCSHPHMI_DemoApp.Core
+﻿using MCSHPHMI.Controls;
+namespace MCSHPHMI.Core
 {
     public interface IAlarmable
     {

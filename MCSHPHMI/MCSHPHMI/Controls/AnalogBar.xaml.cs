@@ -1,17 +1,17 @@
-﻿using MCSHPHMI_DemoApp.Core;
+﻿using MCSHPHMI.Core;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using static MCSHPHMI_DemoApp.Core.Globals;
+using static MCSHPHMI.Core.Globals;
 
-namespace MCSHPHMI_DemoApp.Controls
+namespace MCSHPHMI.Controls
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl, INotifyPropertyChanged, IMappable
+    public partial class AnalogBar : UserControl, INotifyPropertyChanged, IMappable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,19 +20,20 @@ namespace MCSHPHMI_DemoApp.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private SysChan _sysChan = SysChan.NullChannel;
+        private ProcessVariable _procVar = ProcessVariable.NullProcess;
 
-        public SysChan sysChan
+        public ProcessVariable ProcVar
         {
-            get { return _sysChan; }
+            get { return _procVar; }
             set
             {
-                _sysChan = value ?? SysChan.NullChannel;
-                _sysChan.PropertyChanged += LDD_PropertyChanged;
+                _procVar = value ?? ProcessVariable.NullProcess;
+                _procVar.PropertyChanged += LDD_PropertyChanged;
                 RecalculateSizes();
             }
         }
 
+        private double fullHeightPixels { get; set; }
         public double MaxAlarmHeight { get; set; }
         public double MinAlarmHeight { get; set; }
         public Thickness IdealRangeMargin { get; set; }
@@ -66,7 +67,23 @@ namespace MCSHPHMI_DemoApp.Controls
             set { _isMinLimitViolated = value; OnPropertyChanged(); }
         }
 
+        public static readonly DependencyProperty BarWidthProperty =
+            DependencyProperty.Register(
+            "BarWidth", typeof(double), typeof(AnalogBar), new PropertyMetadata((double)20));
+        public static readonly DependencyProperty PointerScalePropertry =
+            DependencyProperty.Register(
+            "PointerScale", typeof(double), typeof(AnalogBar), new PropertyMetadata((double)1));
 
+        public double BarWidth
+        {
+            get { return (double)GetValue(BarWidthProperty); }
+            set { SetValue(BarWidthProperty, value); }
+        }
+        public double PointerScale
+        {
+            get { return (double)GetValue(PointerScalePropertry); }
+            set { SetValue(PointerScalePropertry, value); }
+        }
 
 
         /// <summary>
@@ -78,19 +95,19 @@ namespace MCSHPHMI_DemoApp.Controls
         {
             object barGrid = FindName("BarGrid");
 
-            double fullHeightPixels = ((Grid)barGrid).ActualHeight;
-            double fullScale = sysChan.maxScale - sysChan.minScale;
+            fullHeightPixels = ((Grid)barGrid).ActualHeight;
+            double fullScale = ProcVar.maxScale - ProcVar.minScale;
 
-            MaxAlarmHeight = fullHeightPixels * (sysChan.maxScale - sysChan.maxAlarm) / fullScale;
-            MinAlarmHeight = fullHeightPixels * (sysChan.minAlarm - sysChan.minScale) / fullScale;
-            double idealTopMargin = fullHeightPixels * (sysChan.maxScale - sysChan.maxIdeal) / fullScale;
-            double idealBottomMargin = fullHeightPixels * (sysChan.minIdeal - sysChan.minScale) / fullScale;
+            MaxAlarmHeight = fullHeightPixels * (ProcVar.maxScale - ProcVar.maxAlarm) / fullScale;
+            MinAlarmHeight = fullHeightPixels * (ProcVar.minAlarm - ProcVar.minScale) / fullScale;
+            double idealTopMargin = fullHeightPixels * (ProcVar.maxScale - ProcVar.maxIdeal) / fullScale;
+            double idealBottomMargin = fullHeightPixels * (ProcVar.minIdeal - ProcVar.minScale) / fullScale;
             IdealRangeMargin = new Thickness(0, idealTopMargin, 0, idealBottomMargin);
             // Needle0 is calculated from where 0 would be based on
             // min/max range
 
             unitToPixels = fullHeightPixels / fullScale;
-            Needle0 = fullHeightPixels * sysChan.maxScale / fullScale;
+            Needle0 = fullHeightPixels * ProcVar.maxScale / fullScale;
             NeedleY = Needle0;
 
 
@@ -103,15 +120,19 @@ namespace MCSHPHMI_DemoApp.Controls
 
         public void LDD_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (sender is SysChan)
+            if (sender is ProcessVariable)
             {
                 if (e.PropertyName == "Value")
                 {
-                    NeedleY = -sysChan.Value * unitToPixels + Needle0;
+                    NeedleY = -ProcVar.Value * unitToPixels + Needle0;
+                    if (NeedleY > fullHeightPixels)
+                        NeedleY = fullHeightPixels;
+                    else if (NeedleY < 0)
+                        NeedleY = 0;
                     OnPropertyChanged("NeedleY");
-                    OnPropertyChanged("sysChan");
-                    IsMaxLimitViolated = sysChan.Value > sysChan.maxAlarm;
-                    IsMinLimitViolated = sysChan.Value < sysChan.minAlarm;
+                    OnPropertyChanged("ProcVar");
+                    IsMaxLimitViolated = ProcVar.Value > ProcVar.maxAlarm;
+                    IsMinLimitViolated = ProcVar.Value < ProcVar.minAlarm;
 
                 }
                 else
@@ -121,7 +142,7 @@ namespace MCSHPHMI_DemoApp.Controls
             }
         }
 
-        public UserControl1()
+        public AnalogBar()
         {
             InitializeComponent();
 
@@ -131,11 +152,11 @@ namespace MCSHPHMI_DemoApp.Controls
             // https://blog.scottlogic.com/2012/02/06/a-simple-pattern-for-creating-re-useable-usercontrols-in-wpf-silverlight.html
             //this.DataContext = this;
             LayoutRoot.DataContext = this;
-            sysChan = new SysChan((string)Tag, (string)Tag, "%V", "Long Description");
+            ProcVar = new ProcessVariable((string)Tag, (string)Tag, "%V", "Long Description", false);
             MappableUserControls.Add(this);
         }
 
-        public UserControl1(string Tag) : this()
+        public AnalogBar(string Tag) : this()
         {
             if (!(this.Tag is null))
             {
@@ -149,14 +170,14 @@ namespace MCSHPHMI_DemoApp.Controls
             RecalculateSizes();
         }
 
-        public SysChan MapToSystemChannel()
+        public ProcessVariable MapToSystemChannel()
         {
-            sysChan = sysChans.Find(x => x.ID == (string)Tag);
-            if(sysChan != SysChan.NullChannel)
+            ProcVar = AllProcessVariables.Find(x => x.ID == (string)Tag);
+            if(ProcVar != ProcessVariable.NullProcess)
             {
-                Tag = sysChan.ShortDesc;
+                Tag = ProcVar.ShortDesc;
             }
-            return sysChan;
+            return ProcVar;
         }
 
         public override string ToString()

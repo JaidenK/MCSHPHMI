@@ -41,6 +41,9 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Svg2Xaml, Version=0.3.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Svg2Xaml.0.3.0.7\lib\net40\Svg2Xaml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -63,27 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Alarm.xaml.cs">
-      <DependentUpon>Alarm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\AlarmTable.xaml.cs">
-      <DependentUpon>AlarmTable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\BooleanIndicator.xaml.cs">
-      <DependentUpon>BooleanIndicator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\LiveNumeric.xaml.cs">
-      <DependentUpon>LiveNumeric.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Core\AlarmComparison.cs" />
-    <Compile Include="Core\AlarmEvent.cs" />
-    <Compile Include="Core\Alarms.cs" />
     <Compile Include="Core\Globals.cs" />
-    <Compile Include="Core\IAlarmable.cs" />
-    <Compile Include="Core\IMappable.cs" />
-    <Compile Include="Core\MappableUserControl.cs" />
     <Compile Include="Core\Receiver.cs" />
-    <Compile Include="Core\SysChan.cs" />
     <Compile Include="Simulation\Ethernet.cs" />
     <Compile Include="Simulation\FileReader.cs" />
     <Compile Include="Simulation\Scaler.cs" />
@@ -96,30 +80,6 @@
     <Compile Include="View\T2_Subsystem.xaml.cs">
       <DependentUpon>T2_Subsystem.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\Alarm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\AlarmTable.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\BooleanIndicator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Controls.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\LiveNumeric.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\UserControl1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,9 +87,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controls\UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />

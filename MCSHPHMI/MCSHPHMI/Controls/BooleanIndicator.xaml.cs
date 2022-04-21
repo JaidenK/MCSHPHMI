@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace MCSHPHMI_DemoApp.Controls
+namespace MCSHPHMI.Controls
 {
     /// <summary>
     /// Interaction logic for BooleanIndicator.xaml

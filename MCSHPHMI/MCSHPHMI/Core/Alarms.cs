@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MCSHPHMI_DemoApp.Controls;
+using MCSHPHMI.Controls;
 
-namespace MCSHPHMI_DemoApp.Core
+namespace MCSHPHMI.Core
 {
     public static class Alarms
     {

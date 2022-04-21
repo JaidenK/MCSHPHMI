@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MCSHPHMI_DemoApp"
         xmlns:viewModel="clr-namespace:MCSHPHMI_DemoApp.ViewModel"
-                    xmlns:MCS="clr-namespace:MCSHPHMI_DemoApp.Controls"
+        xmlns:MCS="clr-namespace:MCSHPHMI.Controls;assembly=MCSHPHMI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Background="{StaticResource Gray1}"
-        Title="MainWindow" Height="743.5" Width="1160" Loaded="Window_Loaded">
+        Title="MainWindow" Height="1000" Width="1500" Loaded="Window_Loaded">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
@@ -19,6 +19,12 @@
             <Button Content="Subsystem" Command="{Binding SubsystemCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,29,0,0"/>
         </Grid>
         <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="239,749,0,0">
+                <MCS:RadarChart Margin="5" Tag="ADC1"/>
+                <MCS:RadarChart Margin="5"/>
+                <MCS:RadarChart Margin="5"/>
+
+            </StackPanel>
             <Grid Width="67" Height="67" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,394,0,0" RenderTransformOrigin="0.5,0.5">
                 <Rectangle Height="15" Width="30" Fill="White" Stroke="Black">
                     <Rectangle.RenderTransform>
@@ -33,8 +39,80 @@
                 <Ellipse Width="50" Height="50" Fill="White" Stroke="Black"/>
                 <Ellipse Width="15" Height="15" Fill="White" Stroke="Black"/>
             </Grid>
-
-            <Grid Width="61" Height="45" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,416,0,0" RenderTransformOrigin="0.5,0.5">
+            <Grid Width="1112" Height="242" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="137,550,0,0">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="253,0,0,0">
+                    <Grid Width="67" Height="92" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-33,0,0,0" RenderTransformOrigin="0.5,0.5">
+                        <MCS:BooleanGeometry Geometry="{Binding Geometry}" />
+                        <TextBlock Text="LV-T30&#x0a;Reliant" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="-18,0,0,-72"/>
+                    </Grid>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,0,0,0" Height="197" Width="59"/>
+                </Grid>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="468,0,0,0" >
+                    <Grid Width="61" Height="98" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-22,0,0,0" RenderTransformOrigin="0.5,0.5">
+                        <Image>
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="White" Geometry="M30.87,47.07c2.96,3.82,4.45,8.28,5.54,12.89c0.24,1.02,0.31,2.14,0.16,3.17c-0.2,1.47-1.39,2.36-2.61,2.91
+			c-2.72,1.22-5.55,1.85-8.58,1.12c-1.81-0.44-3.61-0.71-5.06-2.05c-1.18-1.1-1.61-2.42-1.34-3.92c0.71-4.04,2.17-7.83,4.28-11.35
+			c0.52-0.87,0.85-1.79,1.51-2.64c-2.12-1.32-4.4-2.14-5.72-4c-0.88-0.57-1.96,0.15-2.65-1c0.05-0.7,0.33-1.5,0.15-2.47
+			c-0.81-4.43-3.05-8.41-3.81-12.88c-1.54,0.6-2.69,1.8-4.52,1.96c-1.44-0.59-2.86-1.69-4.6-2.6c0-2.29-0.12-4.62,0.03-6.93
+			C3.83,16.65,3,14.1,3.19,11.49c0.05-0.72-0.11-1.46,0.24-2.45c6.31-2.47,12.8-5.02,19.54-7.65c5.19,3.09,10.86,5.79,16.09,9.17
+			c-0.03,1.39,0.36,2.6-0.66,3.69c-0.31,0.33-0.13,1.12-0.18,1.69c-0.17,2,0.36,4.02-0.55,6c-0.31,0.67,0.1,1.66,0.1,2.5
+			c0.02,4.74-0.17,9.49,0.07,14.21c0.17,3.48-1.49,5.51-4.28,7.01C32.68,46.13,31.79,46.59,30.87,47.07z M17.86,36.42
+			c0.64-4.31-0.42-8.46-0.27-12.78c-1.03,0.19-1.35,0.99-2.41,1.07C16.36,28.7,16.87,32.63,17.86,36.42z M13.95,19.44
+			c0.16,1.21,0.37,2.23,0.8,3.2c1.62-1.44,1.61-2.23-0.05-3.61C14.46,19.16,14.21,19.3,13.95,19.44z">
+                                                <GeometryDrawing.Pen>
+                                                    <Pen Thickness="1" Brush="Black" />
+                                                </GeometryDrawing.Pen>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="24-77&#x0a;Twitch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-33"/>
+                    </Grid>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,0,0,0" Height="197" Width="59"/>
+                </Grid>
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid Width="61" Height="98" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-25,0,0,0" RenderTransformOrigin="0.5,0.5">
+                        <Image>
+                            <Image.Source>
+                                <DrawingImage>
+                                    <DrawingImage.Drawing>
+                                        <DrawingGroup>
+                                            <GeometryDrawing Brush="White" Geometry="M8.71,45.65c-2.8-1.5-4.46-3.53-4.28-7.01c0.23-4.73,0.05-9.47,0.07-14.21c0-0.84,0.41-1.82,0.1-2.5
+			c-0.91-1.98-0.38-4.01-0.55-6C4,15.35,4.18,14.56,3.87,14.24c-1.02-1.09-0.63-2.3-0.66-3.69c5.23-3.38,10.9-6.08,16.09-9.17
+			c6.74,2.64,13.23,5.18,19.54,7.65c0.35,1,0.19,1.73,0.24,2.45c0.19,2.61-0.64,5.16-0.47,7.79c0.15,2.31,0.03,4.64,0.03,6.93
+			c-1.73,0.91-3.15,2.01-4.6,2.6c-1.83-0.16-2.98-1.36-4.52-1.96c-0.75,4.48-3,8.45-3.81,12.88c-0.18,0.96,0.1,1.77,0.15,2.47
+			c-0.68,1.15-1.77,0.43-2.65,1c-1.31,1.86-3.6,2.68-5.72,4c0.66,0.85,0.99,1.77,1.51,2.64c2.1,3.51,3.57,7.3,4.28,11.35
+			c0.26,1.49-0.16,2.82-1.34,3.92c-1.45,1.35-3.25,1.62-5.06,2.05c-3.03,0.73-5.86,0.1-8.58-1.12c-1.22-0.55-2.41-1.45-2.61-2.91
+			c-0.14-1.03-0.08-2.15,0.16-3.17c1.09-4.61,2.57-9.07,5.54-12.89C10.48,46.59,9.59,46.13,8.71,45.65z M27.09,24.72
+			c-1.06-0.08-1.38-0.88-2.41-1.07c0.15,4.32-0.91,8.47-0.27,12.78C25.4,32.63,25.91,28.7,27.09,24.72z M27.56,19.03
+			c-1.66,1.37-1.67,2.16-0.05,3.61c0.43-0.96,0.65-1.99,0.8-3.2C28.05,19.3,27.81,19.16,27.56,19.03z">
+                                                <GeometryDrawing.Pen>
+                                                    <Pen Thickness="1" Brush="Black" />
+                                                </GeometryDrawing.Pen>
+                                            </GeometryDrawing>
+                                        </DrawingGroup>
+                                    </DrawingImage.Drawing>
+                                </DrawingImage>
+                            </Image.Source>
+                        </Image>
+                        <TextBlock Text="24-77&#x0a;Twitch" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,-33"/>
+                    </Grid>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,0,0,0" Height="197" Width="59"/>
+                    <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="132,0,0,0" Height="197" Width="59"/>
+                </Grid>
+            </Grid>
+            <Grid Width="61" Height="45" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" RenderTransformOrigin="0.5,0.5">
                 <Rectangle Height="1" Width="1" Fill="White" Stroke="Black">
                 </Rectangle>
                 <Polygon  Points="0,0 30,18 0,36" Stroke="Black" Fill="White" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
@@ -80,15 +158,36 @@
             </Grid>
 
 
+            <DockPanel Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="406,37,0,0">
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type MCS:AnalogBar}">
+                        <Setter Property="Width" Value="50"/>
+                    </Style>
+                </DockPanel.Resources>
+                <MCS:AnalogBar Tag="ADC2"/>
+                <MCS:AnalogBar Tag="ADC2"
+                               BarWidth="30"/>
+                <MCS:AnalogBar Tag="ADC2"
+                               BarWidth="30"
+                               PointerScale="2"/>
+                <MCS:AnalogBar Tag="ADC2"
+                               BarWidth="10"
+                               PointerScale="0.75"/>
+                <MCS:AnalogBar Tag="ADC2"
+                               BarWidth="10"
+                               PointerScale="0.75"/>
+                <MCS:AnalogBar Tag="ADC2"
+                               BarWidth="10"
+                               PointerScale="0.75"/>
+            </DockPanel>
 
 
 
 
+            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="1032,48,0,0"/>
 
-            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,327,0,0"/>
-            <MCS:UserControl1 Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,26,0,0" Height="216" Width="45"/>
-            <MCS:UserControl1 Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="76,26,0,0" Height="216" Width="45"/>
-            <MCS:UserControl1 Tag="AasdDC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="126,26,0,0" Height="216" Width="45"/>
+            
+            <MCS:AnalogBar Tag="AasdDC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1304,2,-196,0" Height="216" Width="44"/>
             <MCS:Alarm ProcessVariable="ADC1"
                        CompareType="GreaterThan"
                        Limit="0.30"
@@ -96,14 +195,14 @@
                        VerticalAlignment="Top" 
                        Width="20" 
                        Height="20" 
-                       Margin="50,17,0,0"/>
+                       Margin="-69,12,0,0"/>
             <MCS:Alarm ProcessVariable="ADC1"
                        CompareType="MinRange"
                        HorizontalAlignment="Left" 
                        VerticalAlignment="Top" 
                        Width="20" 
                        Height="20" 
-                       Margin="50,17,0,0"/>
+                       Margin="-69,37,0,0"/>
 
 
 
@@ -125,7 +224,7 @@
                 </Border>
             </Grid>
 
-            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,267,0,0" Width="200">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="707,80,0,0" Width="200">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -133,32 +232,27 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Process 1" VerticalAlignment="Center"/>
-                <UserControl Content="{Binding Status1}" Grid.Column="2"/>
+                <UserControl Content="{Binding Status1}" Grid.Column="2" Margin="2"/>
 
                 <TextBlock Text="Process 2" Grid.Row="1" VerticalAlignment="Center"/>
-                <UserControl Content="{Binding Status2}" Grid.Column="2" Grid.Row="1"/>
+                <UserControl Content="{Binding Status2}" Grid.Column="2" Grid.Row="1"  Margin="2"/>
 
                 <TextBlock Text="Process 3" Grid.Row="2" VerticalAlignment="Center"/>
-                <UserControl Content="{Binding Status3}" Grid.Column="2" Grid.Row="2"/>
+                <UserControl Content="{Binding Status3}" Grid.Column="2" Grid.Row="2"  Margin="2"/>
             </Grid>
-            <MCS:AlarmTable Width="589" 
+            <MCS:AlarmTable Width="588" 
                 Height="208" 
                 VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" Margin="0,0,29,94"/>
-            <MCS:AlarmTable Width="589" 
+                HorizontalAlignment="Right" Margin="0,0,-664,154"/>
+            <MCS:AlarmTable Width="590" 
                 Height="109" 
                 VerticalAlignment="Bottom" 
-                HorizontalAlignment="Right" Margin="0,0,166,68"/>
-            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,345,0,0"/>
-            <MCS:LiveNumeric Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,363,0,0"/>
-            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,381,0,0"/>
-            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,399,0,0"/>
-            <MCS:LiveNumeric Tag="ADC2" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Height="18" Margin="226,417,0,0"/>
+                HorizontalAlignment="Right" Margin="0,0,-664,1"/>
         </Grid>
         <!--<ContentPresenter Content="{Binding MainView}" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
     </DockPanel>
