@@ -5,8 +5,6 @@ namespace MCSHPHMI.Core
 {
     public static class MappableUserControls
     {
-        public static List<IMappable> AllMappableControls = new List<IMappable>();
-
         public static IMappable Add(IMappable mappable)
         {
             AllMappableControls.Add(mappable);

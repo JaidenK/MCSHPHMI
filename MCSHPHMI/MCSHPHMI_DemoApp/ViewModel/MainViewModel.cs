@@ -3,8 +3,11 @@ using LiveCharts.Wpf;
 using MCSHPHMI.Controls;
 using MCSHPHMI.Core;
 using MCSHPHMI_DemoApp.Core;
+using Svg2Xaml;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace MCSHPHMI_DemoApp.ViewModel
@@ -27,6 +30,13 @@ namespace MCSHPHMI_DemoApp.ViewModel
             set { _myLabel = value; }
         }
 
+        private DrawingImage _imgSrc;
+
+        public DrawingImage ImgSrc
+        {
+            get { return _imgSrc; }
+            set { _imgSrc = value; OnPropertyChanged(); }
+        }
 
 
         private bool _foo;
@@ -98,6 +108,11 @@ namespace MCSHPHMI_DemoApp.ViewModel
             MyStringList.Add("String 3");
             MyStringList.Add("String 4");
 
+            using (FileStream stream = new FileStream("images/Picaso1.svg", FileMode.Open, FileAccess.Read))
+            //try
+            {
+                ImgSrc = SvgReader.Load(stream);
+            }
 
             //LDD1 = new UserControl1("ADC1");
             //LDD2 = new UserControl1("ADC2");

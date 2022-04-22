@@ -12,6 +12,7 @@ namespace MCSHPHMI.Core
     {
         public static List<ProcessVariable> AllProcessVariables = new List<ProcessVariable>();
         public static Dictionary<string, ProcessVariable> ProcVarDict = new Dictionary<string, ProcessVariable>();
+        public static List<IMappable> AllMappableControls = new List<IMappable>();
 
         public static ProcessVarEditor ProcVarEditor;
     }

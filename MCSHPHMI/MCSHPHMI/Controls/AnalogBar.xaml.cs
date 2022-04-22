@@ -73,6 +73,15 @@ namespace MCSHPHMI.Controls
         public static readonly DependencyProperty PointerScalePropertry =
             DependencyProperty.Register(
             "PointerScale", typeof(double), typeof(AnalogBar), new PropertyMetadata((double)1));
+        public static readonly DependencyProperty IDVisibilityPropertry =
+            DependencyProperty.Register(
+            "IDVisibility", typeof(Visibility), typeof(AnalogBar), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty ValueVisibilityPropertry =
+            DependencyProperty.Register(
+            "ValueVisibility", typeof(Visibility), typeof(AnalogBar), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty UnitsVisibilityPropertry =
+            DependencyProperty.Register(
+            "UnitsVisibility", typeof(Visibility), typeof(AnalogBar), new PropertyMetadata(Visibility.Visible));
 
         public double BarWidth
         {
@@ -83,6 +92,21 @@ namespace MCSHPHMI.Controls
         {
             get { return (double)GetValue(PointerScalePropertry); }
             set { SetValue(PointerScalePropertry, value); }
+        }
+        public Visibility IDVisibility
+        {
+            get { return (Visibility)GetValue(IDVisibilityPropertry); }
+            set { SetValue(IDVisibilityPropertry, value); }
+        }
+        public Visibility ValueVisibility
+        {
+            get { return (Visibility)GetValue(ValueVisibilityPropertry); }
+            set { SetValue(ValueVisibilityPropertry, value); }
+        }
+        public Visibility UnitsVisibility
+        {
+            get { return (Visibility)GetValue(UnitsVisibilityPropertry); }
+            set { SetValue(UnitsVisibilityPropertry, value); }
         }
 
 

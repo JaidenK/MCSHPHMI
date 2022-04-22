@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace MCSHPHMI
+namespace MCSHPHMI.Core
 { 
     public class ObservableObject : INotifyPropertyChanged
     {

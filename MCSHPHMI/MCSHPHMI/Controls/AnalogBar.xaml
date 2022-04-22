@@ -9,9 +9,9 @@
     <DockPanel x:Name="LayoutRoot" ToolTip="{Binding ProcVar.Description}">
         <StackPanel DockPanel.Dock="Bottom">
             <!--<TextBlock Text="{Binding ElementName=AnalogControl1, Path=}" HorizontalAlignment="Center"/>-->
-            <TextBlock Text="{Binding Tag}" HorizontalAlignment="Center"/>
-            <TextBlock Text="{Binding ProcVar.Value, StringFormat={}{0:0.00}}" FontFamily="{StaticResource LiveDataFont}" Foreground="{StaticResource LiveBlue}" TextAlignment="Center" FontWeight="Bold"/>
-            <TextBlock Text="{Binding ProcVar.Units}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Tag}" Visibility="{Binding IDVisibility}" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding ProcVar.Value, StringFormat={}{0:0.00}}" Visibility="{Binding ValueVisibility}" FontFamily="{StaticResource LiveDataFont}" Foreground="{StaticResource LiveBlue}" TextAlignment="Center" FontWeight="Bold"/>
+            <TextBlock Text="{Binding ProcVar.Units}" HorizontalAlignment="Center" Visibility="{Binding UnitsVisibility}"/>
         </StackPanel>
         <!--<Grid Name="BarGrid" Width="{Binding BarWidth}" HorizontalAlignment="Center">-->
         <Grid Name="BarGrid" Width="{Binding BarWidth}">
