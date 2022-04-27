@@ -1,0 +1,57 @@
+﻿<Window x:Class="MCSHPHMI.View.AlarmDetails"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MCSHPHMI.View"
+        mc:Ignorable="d"
+        Title="Alarm Details" 
+        Background="{StaticResource Gray1}"        
+        SizeToContent="WidthAndHeight"
+        MinWidth="300">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Grid Margin="10">
+        <StackPanel>
+            <DockPanel Margin="0,0,0,20">
+                <StackPanel Width="100">
+                    <TextBlock Text="Process Variable"/>
+                    <TextBlock Text="Level"/>
+                    <TextBlock Text="Latches?"/>
+                    <TextBlock Text="Hysteresis"/>
+                    <TextBlock Text="Comparison"/>
+                    <TextBlock Text="Limit"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="{Binding ProcVar.ID}"/>
+                    <TextBlock Text="{Binding Level}"/>
+                    <TextBlock Text="{Binding Latches}"/>
+                    <TextBlock Text="{Binding Hysteresis}"/>
+                    <TextBlock Text="{Binding Comparison}"/>
+                    <TextBlock Text="{Binding Limit}"/>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Margin="0,0,0,5">
+                <Button DockPanel.Dock="Right" Content="Clear" Click="Button_Click"/>
+                <TextBlock Text="History:"/>
+            </DockPanel>
+            <ListView Name="MiniAlarmTableListView" 
+                  HorizontalAlignment="Left" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Time" 
+                                    DisplayMemberBinding="{Binding Time}" 
+                                    />
+                        <GridViewColumn Header="Description" 
+                                    DisplayMemberBinding="{Binding alarm}" 
+                                    />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Button HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Content="Suppress" Click="Button_Click_1"/>
+    </Grid>
+</Window>

@@ -30,10 +30,11 @@ namespace MCSHPHMI.Controls
         /// table.
         /// </summary>
         /// <param name="alarm"></param>
-        public static void AlarmViolated(Alarm alarm)
+        public static AlarmEvent AlarmViolated(Alarm alarm)
         {
             AlarmEvent newAlarmEvent = new AlarmEvent(alarm);
             AlarmEvents.Add(newAlarmEvent);
+            return newAlarmEvent;
         }
 
         public AlarmTable()

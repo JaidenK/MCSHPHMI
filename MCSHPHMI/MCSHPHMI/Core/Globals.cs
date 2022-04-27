@@ -15,5 +15,6 @@ namespace MCSHPHMI.Core
         public static List<IMappable> AllMappableControls = new List<IMappable>();
 
         public static ProcessVarEditor ProcVarEditor;
+        public static AlarmDetails AlarmDetailsEditor;
     }
 }

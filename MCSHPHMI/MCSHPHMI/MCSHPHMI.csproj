@@ -104,9 +104,11 @@
     <Compile Include="Core\Globals.cs" />
     <Compile Include="Core\IAlarmable.cs" />
     <Compile Include="Core\IMappable.cs" />
+    <Compile Include="Core\ISwappableGeometry.cs" />
     <Compile Include="Core\MappableUserControl.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\ProcessVariable.cs" />
+    <Compile Include="Core\SwappableGeometry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -119,6 +121,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="View\AlarmDetails.xaml.cs">
+      <DependentUpon>AlarmDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProcessVarEditor.xaml.cs">
       <DependentUpon>ProcessVarEditor.xaml</DependentUpon>
@@ -164,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\RadarChart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AlarmDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

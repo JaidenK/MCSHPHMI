@@ -45,7 +45,7 @@
             <Grid Width="1112" Height="242" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="137,550,0,0">
                 <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="253,0,0,0">
                     <Grid Width="67" Height="92" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-33,0,0,0" RenderTransformOrigin="0.5,0.5">
-                        <MCS:BooleanGeometry Geometry="{Binding Geometry}" />
+                        <MCS:BooleanGeometry Tag="ADC1"  AltGeometryID="ABC123"/>
                         <TextBlock Text="LV-T30&#x0a;Reliant" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="-18,0,0,-72"/>
                     </Grid>
                     <MCS:AnalogBar Tag="ADC1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="44,0,0,0" Height="197" Width="59"/>

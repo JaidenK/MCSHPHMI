@@ -1,5 +1,7 @@
 ﻿using MCSHPHMI.Core;
+using MCSHPHMI.View;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using static MCSHPHMI.Core.Globals;
@@ -20,6 +22,7 @@ namespace MCSHPHMI.Controls
 
         public string Foobar;
         public AlarmLevel Level { get; set; }
+        public ObservableCollection<AlarmEvent> EventHistory { get; set; } = new ObservableCollection<AlarmEvent>();
         public bool Latches { get; set; }
         public double Hysteresis { get; set; }
         public string MADB_ID { get; set; } // If set, look up the parameters for the alarm in the database
@@ -45,9 +48,9 @@ namespace MCSHPHMI.Controls
                 {
                     if (value)
                     {
-                        AlarmTable.AlarmViolated(this);
+                        EventHistory.Add(AlarmTable.AlarmViolated(this));
                         Console.WriteLine("ALARM TRIGGERED: " + this.ToString());
-                        AlarmSound.Play();
+                        //AlarmSound.Play();
                     }
 
                     _isViolated = value;
@@ -182,7 +185,11 @@ namespace MCSHPHMI.Controls
 
         private void UserControl_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            MessageBox.Show($"Clicked:\n{this}");
+            AlarmDetailsEditor?.Close();
+            AlarmDetailsEditor = new AlarmDetails();
+            AlarmDetailsEditor.DataContext = this;
+            AlarmDetailsEditor.MiniAlarmTableListView.ItemsSource = EventHistory;
+            AlarmDetailsEditor.Show();
         }
     }
 }
